@@ -1,0 +1,183 @@
+{
+  "name": "markdown-notes",
+  "displayName": "Markdown Notes",
+  "description": "Gestor simple de notas markdown con encriptación",
+  "version": "1.0.0",
+  "publisher": "remiaguilar",
+  "author": {
+    "name": "Remi Aguilar",
+    "url": "https://remiaguilar.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/remiaguilar/vs-notes"
+  },
+  "bugs": {
+    "url": "https://github.com/remiaguilar/vs-notes/issues"
+  },
+  "homepage": "https://github.com/remiaguilar/vs-notes#readme",
+  "keywords": [
+    "markdown",
+    "notes",
+    "encryption",
+    "password-protected",
+    "wiki-links",
+    "open-source"
+  ],
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "markdownNotes.selectDirectory",
+        "title": "Seleccionar Directorio de Notas",
+        "category": "Markdown Notes",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "markdownNotes.createNote",
+        "title": "Crear Nueva Nota",
+        "category": "Markdown Notes",
+        "icon": "$(new-file)"
+      },
+      {
+        "command": "markdownNotes.createFolder",
+        "title": "Crear Nueva Carpeta",
+        "category": "Markdown Notes",
+        "icon": "$(new-folder)"
+      },
+      {
+        "command": "markdownNotes.refresh",
+        "title": "Refrescar Notas",
+        "category": "Markdown Notes",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "markdownNotes.renameNote",
+        "title": "Renombrar",
+        "category": "Markdown Notes",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "markdownNotes.deleteNote",
+        "title": "Eliminar",
+        "category": "Markdown Notes",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "markdownNotes.protectNote",
+        "title": "Proteger con Contraseña",
+        "category": "Markdown Notes",
+        "icon": "$(lock)"
+      },
+      {
+        "command": "markdownNotes.unlockNote",
+        "title": "Desbloquear",
+        "category": "Markdown Notes",
+        "icon": "$(unlock)"
+      },
+      {
+        "command": "markdownNotes.lockNote",
+        "title": "Bloquear",
+        "category": "Markdown Notes",
+        "icon": "$(lock)"
+      },
+      {
+        "command": "markdownNotes.moveNote",
+        "title": "Mover a...",
+        "category": "Markdown Notes",
+        "icon": "$(file-symlink-directory)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "markdown-notes",
+          "title": "Markdown Notes",
+          "icon": "$(notebook)"
+        }
+      ]
+    },
+    "views": {
+      "markdown-notes": [
+        {
+          "id": "markdownNotesExplorer",
+          "name": "Notas"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "markdownNotes.createNote",
+          "when": "view == markdownNotesExplorer",
+          "group": "navigation"
+        },
+        {
+          "command": "markdownNotes.createFolder",
+          "when": "view == markdownNotesExplorer",
+          "group": "navigation"
+        },
+        {
+          "command": "markdownNotes.refresh",
+          "when": "view == markdownNotesExplorer",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "markdownNotes.renameNote",
+          "when": "view == markdownNotesExplorer"
+        },
+        {
+          "command": "markdownNotes.protectNote",
+          "when": "view == markdownNotesExplorer && viewItem == note",
+          "group": "protection"
+        },
+        {
+          "command": "markdownNotes.unlockNote",
+          "when": "view == markdownNotesExplorer && viewItem == protectedNote",
+          "group": "protection"
+        },
+        {
+          "command": "markdownNotes.lockNote",
+          "when": "view == markdownNotesExplorer && viewItem == unlockedNote",
+          "group": "protection"
+        },
+        {
+          "command": "markdownNotes.moveNote",
+          "when": "view == markdownNotesExplorer && viewItem == note",
+          "group": "management"
+        },
+        {
+          "command": "markdownNotes.deleteNote",
+          "when": "view == markdownNotesExplorer",
+          "group": "management"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "build": "npm run compile && (code --uninstall-extension remiaguilar.markdown-notes || true) && vsce package --allow-missing-repository --allow-star-activation --no-yarn && code --install-extension markdown-notes-1.0.0.vsix --force"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0"
+  }
+}

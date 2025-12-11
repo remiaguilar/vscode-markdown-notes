@@ -145,6 +145,25 @@
         "title": "Configurar Directorio",
         "category": "Markdown Notes",
         "icon": "$(folder-opened)"
+      },
+      {
+        "command": "markdownNotes.createNewItem",
+        "title": "Crear Nuevo...",
+        "category": "Markdown Notes",
+        "icon": "$(add)"
+      },
+      {
+        "command": "markdownNotes.collapseAll",
+        "title": "Colapsar Todo",
+        "category": "Markdown Notes",
+        "icon": "$(collapse-all)"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "markdownNotes.createMenu",
+        "label": "Crear Nuevo",
+        "icon": "$(add)"
       }
     ],
     "viewsContainers": {
@@ -173,29 +192,39 @@
     "menus": {
       "view/title": [
         {
-          "command": "markdownNotes.createNote",
+          "submenu": "markdownNotes.createMenu",
           "when": "view == markdownNotesExplorer",
-          "group": "navigation"
-        },
-        {
-          "command": "markdownNotes.createFolder",
-          "when": "view == markdownNotesExplorer",
-          "group": "navigation"
+          "group": "navigation@1"
         },
         {
           "command": "markdownNotes.refresh",
           "when": "view == markdownNotesExplorer",
-          "group": "navigation"
+          "group": "navigation@2"
         },
         {
           "command": "markdownNotes.showGraphView",
           "when": "view == markdownNotesExplorer",
-          "group": "navigation"
+          "group": "navigation@3"
         },
         {
           "command": "markdownNotes.configureDirectory",
           "when": "view == markdownNotesExplorer",
-          "group": "configuration"
+          "group": "inline"
+        },
+        {
+          "command": "markdownNotes.collapseAll",
+          "when": "view == markdownNotesExplorer",
+          "group": "inline"
+        }
+      ],
+      "markdownNotes.createMenu": [
+        {
+          "command": "markdownNotes.createNote",
+          "group": "create@1"
+        },
+        {
+          "command": "markdownNotes.createFolder",
+          "group": "create@2"
         }
       ],
       "view/item/context": [

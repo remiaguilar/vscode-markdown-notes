@@ -47,7 +47,6 @@ function activate(context) {
     const notesProvider = new NotesProvider(context);
     const treeView = vscode.window.createTreeView('markdownNotesExplorer', {
         treeDataProvider: notesProvider,
-        showCollapseAll: true,
         dragAndDropController: notesProvider
     });
     // Comando: Seleccionar directorio
@@ -154,6 +153,27 @@ function activate(context) {
             notesProvider.refresh();
             vscode.window.showInformationMessage(`Carpeta creada: ${folderName}`);
         }
+    }));
+    // Comando: Crear nuevo item (menú unificado)
+    context.subscriptions.push(vscode.commands.registerCommand('markdownNotes.createNewItem', async (node) => {
+        const options = ['📄 Crear Archivo', '📁 Crear Carpeta'];
+        const selected = await vscode.window.showQuickPick(options, {
+            placeHolder: 'Selecciona qué deseas crear'
+        });
+        if (!selected)
+            return;
+        if (selected.includes('Archivo')) {
+            // Ejecutar comando de crear nota
+            vscode.commands.executeCommand('markdownNotes.createNote', node);
+        }
+        else if (selected.includes('Carpeta')) {
+            // Ejecutar comando de crear carpeta
+            vscode.commands.executeCommand('markdownNotes.createFolder', node);
+        }
+    }));
+    // Comando: Colapsar todo
+    context.subscriptions.push(vscode.commands.registerCommand('markdownNotes.collapseAll', () => {
+        vscode.commands.executeCommand('workbench.actions.treeView.markdownNotesExplorer.collapseAll');
     }));
     // Comando: Abrir nota
     context.subscriptions.push(vscode.commands.registerCommand('markdownNotes.openNote', async (node) => {

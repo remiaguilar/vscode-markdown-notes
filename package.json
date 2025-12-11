@@ -43,7 +43,7 @@
       },
       {
         "command": "markdownNotes.createNote",
-        "title": "Crear Nueva Nota",
+        "title": "Crear Nuevo Archivo",
         "category": "Markdown Notes",
         "icon": "$(new-file)"
       },
@@ -94,6 +94,57 @@
         "title": "Mover a...",
         "category": "Markdown Notes",
         "icon": "$(file-symlink-directory)"
+      },
+      {
+        "command": "markdownNotes.pasteContent",
+        "title": "Pegar Contenido",
+        "category": "Markdown Notes"
+      },
+      {
+        "command": "markdownNotes.followWikiLink",
+        "title": "Seguir Wiki Link",
+        "category": "Markdown Notes"
+      },
+      {
+        "command": "markdownNotes.navigateToWikiLinkFromClick",
+        "title": "Navegar a Wiki Link desde Click",
+        "category": "Markdown Notes"
+      },
+      {
+        "command": "markdownNotes.showGraphView",
+        "title": "Vista de Grafo",
+        "category": "Markdown Notes",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "markdownNotes.copyItem",
+        "title": "Copiar",
+        "category": "Markdown Notes",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "markdownNotes.duplicateItem",
+        "title": "Duplicar",
+        "category": "Markdown Notes",
+        "icon": "$(files)"
+      },
+      {
+        "command": "markdownNotes.revealInFileExplorer",
+        "title": "Ir al Directorio",
+        "category": "Markdown Notes",
+        "icon": "$(file-directory)"
+      },
+      {
+        "command": "markdownNotes.pasteItem",
+        "title": "Pegar",
+        "category": "Markdown Notes",
+        "icon": "$(paste)"
+      },
+      {
+        "command": "markdownNotes.configureDirectory",
+        "title": "Configurar Directorio",
+        "category": "Markdown Notes",
+        "icon": "$(folder-opened)"
       }
     ],
     "viewsContainers": {
@@ -110,6 +161,12 @@
         {
           "id": "markdownNotesExplorer",
           "name": "Notas"
+        },
+        {
+          "id": "markdownGraphView",
+          "name": "Vista de Grafo",
+          "type": "webview",
+          "when": "config.markdownNotes.showGraphView"
         }
       ]
     },
@@ -129,6 +186,16 @@
           "command": "markdownNotes.refresh",
           "when": "view == markdownNotesExplorer",
           "group": "navigation"
+        },
+        {
+          "command": "markdownNotes.showGraphView",
+          "when": "view == markdownNotesExplorer",
+          "group": "navigation"
+        },
+        {
+          "command": "markdownNotes.configureDirectory",
+          "when": "view == markdownNotesExplorer",
+          "group": "configuration"
         }
       ],
       "view/item/context": [
@@ -160,9 +227,48 @@
           "command": "markdownNotes.deleteNote",
           "when": "view == markdownNotesExplorer",
           "group": "management"
+        },
+        {
+          "command": "markdownNotes.copyItem",
+          "when": "view == markdownNotesExplorer",
+          "group": "clipboard"
+        },
+        {
+          "command": "markdownNotes.duplicateItem",
+          "when": "view == markdownNotesExplorer",
+          "group": "clipboard"
+        },
+        {
+          "command": "markdownNotes.pasteItem",
+          "when": "view == markdownNotesExplorer",
+          "group": "clipboard"
+        },
+        {
+          "command": "markdownNotes.revealInFileExplorer",
+          "when": "view == markdownNotesExplorer",
+          "group": "navigation"
         }
       ]
-    }
+    },
+    "keybindings": [
+      {
+        "command": "markdownNotes.pasteContent",
+        "key": "ctrl+v",
+        "mac": "cmd+v",
+        "when": "focusedView == markdownNotesExplorer"
+      },
+      {
+        "command": "markdownNotes.followWikiLink",
+        "key": "f12",
+        "when": "editorTextFocus && (editorLangId == markdown || editorLangId == plaintext)"
+      },
+      {
+        "command": "markdownNotes.followWikiLink",
+        "key": "ctrl+click",
+        "mac": "cmd+click",
+        "when": "editorTextFocus && (editorLangId == markdown || editorLangId == plaintext)"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

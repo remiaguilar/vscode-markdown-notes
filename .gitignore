@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Compiled output
+out/
+
+# VS Code Extension files
+*.vsix
+
+# Testing
+.vscode-test/
+
+# OS files
+.DS_Store
+
+# Logs
+*.log
+
+# Vault data (security)
+*.vault
+vault.json

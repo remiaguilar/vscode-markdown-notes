@@ -1,0 +1,15 @@
+{
+  "name": "Configuración de Ejemplo",
+  "version": "1.0.0",
+  "settings": {
+    "theme": "dark",
+    "language": "es",
+    "autoSave": true,
+    "features": [
+      "wiki-links",
+      "preview",
+      "graph-view"
+    ]
+  },
+  "description": "Este JSON aparecerá formateado en el preview"
+}

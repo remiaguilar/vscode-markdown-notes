@@ -1,0 +1,10 @@
+{
+  "appName": "Markdown Notes",
+  "version": "1.0.0",
+  "theme": "dark",
+  "assets": {
+    "logo": "assets/logo.png",
+    "banner": "assets/banner.jpg"
+  },
+  "related": "[[red-completa-archivos]]"
+}
